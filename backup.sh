@@ -93,13 +93,13 @@ for include in ${includes[@]}; do
 done
 
 # generate exclude options
-#exclude_opts=""
-#for exclude in ${excludes[@]}; do
-#    exlcude_opts+="--exclude $exclude "
-#done
+exclude_opts=""
+for exclude in ${excludes[@]}; do
+    exclude_opts+="--exclude $exclude "
+done
 
 # backup the request src dir
-duplicity incr --progress --archive-dir $ARCHIVE_DIR --encrypt-key $KEY_SIG --allow-source-mismatch --full-if-older-than $full_if_older_than $include_opts --exclude '**' $src_dir "boto3+s3://$dest_bucket_path"
+duplicity incr --progress --archive-dir $ARCHIVE_DIR --encrypt-key $KEY_SIG --allow-source-mismatch --full-if-older-than $full_if_older_than $include_opts $exclude_opts $src_dir "boto3+s3://$dest_bucket_path"
 # and prune the backups
 duplicity remove-older-than $remove_if_older_than --force --archive-dir $ARCHIVE_DIR "boto3+s3://$dest_bucket_path"
 
