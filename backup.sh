@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 set -e
 
 # Requires AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and PASSPHRASE environment variables
